@@ -1,0 +1,19 @@
+# version: '3'
+services:
+  proxy-client:
+    build: ./proxy-client
+    ports:
+      - "8080:8080"
+    networks:
+      - proxy-network
+
+  proxy-server:
+    build: ./proxy-server
+    ports:
+      - "9090:9090"
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
