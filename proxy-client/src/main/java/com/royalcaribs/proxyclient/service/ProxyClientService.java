@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.Socket;
 
 @Service
-public class ProxyService {
+public class ProxyClientService {
 
 //    private static final String PROXY_SERVER_HOST = "proxy-server";
 //    private static final int PROXY_SERVER_PORT = 9090;
@@ -46,9 +46,6 @@ public class ProxyService {
             while ((line = in.readLine()) != null) {
                 response.append(line).append("\n");
             }
-
-            // Log the response for debugging purposes
-            System.out.println("Response: " + response);
 
             return response.toString();
         } catch (Exception e) {
