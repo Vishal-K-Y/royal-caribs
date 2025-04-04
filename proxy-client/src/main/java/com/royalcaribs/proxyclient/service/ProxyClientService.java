@@ -1,5 +1,6 @@
 package com.royalcaribs.proxyclient.service;
 
+import com.royalcaribs.proxyclient.utility.SocketSingleton;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,10 @@ public class ProxyClientService {
         String path = getPathFromRequest(request);
         System.out.println("Processing Request to: " + path);
 
-        try (Socket socket = new Socket(PROXY_SERVER_HOST, PROXY_SERVER_PORT);
+        try (//Socket socket = new Socket(PROXY_SERVER_HOST, PROXY_SERVER_PORT);
+             Socket socket = SocketSingleton.getInstance(PROXY_SERVER_HOST, PROXY_SERVER_PORT).getSocket();
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
             // Forward the HTTP request
             out.println("GET " + path + " HTTP/1.1");
             out.println("Host: " + PROXY_SERVER_HOST + ":" + PROXY_SERVER_PORT);
